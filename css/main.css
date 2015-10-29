@@ -14,6 +14,12 @@ header {
 body {
 	background-color: rgba(233, 226, 206, 1);
 }
+#description {
+	margin: 2em;
+}
+#description img {
+	margin: auto;
+}
 
 @media screen and (min-width: 768px) {
 	header {

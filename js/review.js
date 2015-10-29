@@ -20,14 +20,14 @@ $('form').submit(function() {
 
 	review.set('title', $('#title').val());
 	review.set('rating', rating);
-	review.set('body', $('#body').val());
+	//review.set('body', $('#body').val());
 
 	review.save(null, {
         success: getData
     });
 
     review.set('title', '');
-	review.set('body', '');
+	//review.set('body', '');
 	
 	return false
 })
@@ -94,12 +94,12 @@ var buildList = function(data) {
 var addItem = function(item) {
 	// Get parameters (website, band, song) from the data item passed to the function
     var title = item.get('title');
-    var review = item.get('body');
+    //var review = item.get('body');
     var starScore = item.get('rating');
     //var song = item.get('song');
 
 	// Append li that includes text from the data item
-    var li = $('<li>' + title + ', ' + review  + '</li>');
+    var li = $('<li>' + title  + '</li>');
     var starRating = $('#ave-star').raty({
 		readOnly: true,
 		score : starScore
