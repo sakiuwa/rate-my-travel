@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewpoint" content="width=device-width, initial-scale=1">
+
+		<meta name="author" content="Saki Uwagawa">
+		<meta name="description" content="A rating/review page for various travel spots around the world using Parse">
+
+		<title>Rate Your Travel Experience</title>
+		<link rel="icon" href="img/page-icon.png">
+
+		<!--Importing files and templates-->
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="css" href="css/main.css">
+		<script src="//www.parsecdn.com/js/parse-1.6.0.min.js"></script>
+
+		<!--Importing Raty-Fa-->
+		<script src="plugin/jquery.raty-fa.js"></script>
+		<!--Importing Font Awesome-->
+		<link href="//netdna.bootstrapcdn.com/font-awesome/latest/css/font-awesome.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<header>
+			<div class="container">
+				<h1>Asakusa</h1>
+				<h4>Tokyo, Japan</h4>
+				<div id="ave-star"></div>
+			</div>
+		</header>
+
+
+		<div id="description">
+			<div class="container">
+				<h3>About the Spot</h3>
+				<p>Asakusa is a popular travel spot, located at the center of Tokyo's shitamachi, where the atmosphere of the old-Tokyo still remains. Asakusa is famous for its long street of souvenir shops. At the beginning of the street is the "Kaminari-mon", which means Thunder Gate. It is decorated with a large red lantern, and this is a very popular picture spot. At the end of the street is the Buddhist temple, Sensoji, and a large pot of smoke. It is said that if you apply the smoke on a certain part of your body, you will see improvement in that area. It is pretty common to see people bathing their head in smoke before big tests.</p>
+			</div>
+		</div>
+
+
+		<div id="reviews">
+			<div class="container">
+				<h3>Write a review!</h3>
+				<form>
+					<div class="form-input">
+						<label>Review Title</label>
+						<input type="text" id="title" placeholder="Title for your review">
+						<br>
+						<div id="star"></div>
+						<br>
+						<label>Your Review</label>
+						<input type="text" id="body" placeholder="What did you think of this spot?">
+					</div>
+					<button type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
+
+		<!-- To check in input is being processed -->
+		<div class="container">
+			<ul id="list"></ul>
+		</div>
+		<footer>
+			<div class="container">
+				<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
+			</div>
+		</footer>
+	</body>
+
+	<!-- Why does this go down here? -->
+	<script type="text/javascript" src="js/review.js"></script>
+</html>
