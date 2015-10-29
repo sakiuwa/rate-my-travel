@@ -17,17 +17,21 @@ var review = new Reviews();
 
 $('form').submit(function() {
 	var review = new Reviews();
+	var text = $('#body').val();
+	console.log(text);
 
 	review.set('title', $('#title').val());
 	review.set('rating', rating);
-	//review.set('body', $('#body').val());
+	review.set('body', text);
 
 	review.save(null, {
         success: getData
     });
 
     review.set('title', '');
-	//review.set('body', '');
+	review.set('body', '');
+	$('#title').val('');
+	$('#body').val('');
 	
 	return false
 })
@@ -64,11 +68,7 @@ var getRatings = function() {
 var getAverage = function(data) {
 	var sum = 0;
 	var count = 0;
-	console.log(count);
 	for (i in data) {
-		sum += data[i];
-		count += 1;
-		console.log(count);
 	}
 	averageRating = sum / count;
 	// console.log(sum);
@@ -124,7 +124,7 @@ getRatings();
 
 $('#ave-star').raty({
 	readOnly: true,
-	noRatedMsg : "Not rated yet!"
+	score : averageRating
 });
 
 
