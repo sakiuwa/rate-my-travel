@@ -1,0 +1,26 @@
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css);
+/*importing Font Awesome*/
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+
+
+
+header {
+	background-image: url("../img/banner-small.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 250px;
+	color: white;
+}
+body {
+	background-color: rgba(233, 226, 206, 1);
+}
+
+@media screen and (min-width: 768px) {
+	header {
+		background-image: url("../img/banner-large.jpg");
+		/* image taken from http://3.bp.blogspot.com/-OaqV3w4jFMw/TbQq9aRAInI/AAAAAAAADaU/sKNjVOo64dY/s1600/DSC_0706.JPG */
+		height: 500px;
+		background-color: rgba(28, 28, 28, 1);
+	}
+
+}
