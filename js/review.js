@@ -18,7 +18,6 @@ var review = new Reviews();
 $('form').submit(function() {
 	var review = new Reviews();
 	var text = $('#body').val();
-	console.log(text);
 
 	review.set('title', $('#title').val());
 	review.set('rating', rating);
@@ -40,7 +39,6 @@ $('form').submit(function() {
 
 // Write a function to get data
 var getData = function() {
-	
 
 	// Set up a new query for our Music class
     var query = new Parse.Query(Reviews);
@@ -71,22 +69,18 @@ var getAverage = function(data) {
 	for (i in data) {
 	}
 	averageRating = sum / count;
-	// console.log(sum);
-	// console.log(averageRating);
 }
 
 
 // A function to build your list
 var buildList = function(data) {
 	// Empty out your unordered list
-	$('#list').empty();
-	// Loop through your data, and pass each element to the addItem function
+	$('#list-body').empty;
+		// Loop through your data, and pass each element to the addItem function
     for (i in data) {
         addItem(data[i]);
+        console.log(data[i]);
     }
-    /* data.forEach(functions(d) {
-        addItem(d);
-    }); */
 }
 
 
@@ -94,26 +88,34 @@ var buildList = function(data) {
 var addItem = function(item) {
 	// Get parameters (website, band, song) from the data item passed to the function
     var title = item.get('title');
-    //var review = item.get('body');
+    var body = item.get('body');
     var starScore = item.get('rating');
     //var song = item.get('song');
 
 	// Append li that includes text from the data item
-    var li = $('<li>' + title  + '</li>');
-    var starRating = $('#ave-star').raty({
+    var starRating = $('.starDisp').raty({
 		readOnly: true,
-		score : starScore
+		score : item.get('rating')
 	});
-	// console.log(starRating);
-    var button = $("<button class='btn-danger btn-xs'><span class='glyphicon'>Remove</span></button>'");
+    var button = $("<button class='btn-danger btn-xs'><span class='glyphicon'>Delete</span></button>'");
     button.click(function() {
         item.destroy({
-            success:getData
+            success: getData()
         });
     });
-    li.append(starRating);
-    li.append(button);
-    $('#list').append(li);
+
+    var li2 = $("<li class='list-group-item'>");
+    var reviewTitle = $("<h4 class='list-title'>" + title + "</h4>");
+    var reviewStar = $("<div class='starDisp'></div>");
+    var reviewBody = $("<p class='list-body'>" + body + "</p></li>");
+
+    li2.append(reviewTitle);
+    li2.append(reviewStar);
+    li2.append(reviewBody);
+    li2.append(button);
+
+    $('.list-group').append(li2);
+
 
 	// Time pending, create a button that removes the data item on click
 }
@@ -122,9 +124,9 @@ var addItem = function(item) {
 getData();
 getRatings();
 
-$('#ave-star').raty({
+$('.ave-star').raty({
 	readOnly: true,
-	score : averageRating
+	score : 3
 });
 
 

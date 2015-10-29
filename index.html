@@ -27,7 +27,7 @@
 			<div class="container">
 				<h1>Asakusa</h1>
 				<h4>Tokyo, Japan</h4>
-				<div id="ave-star"></div>
+				<div class="ave-star"></div>
 			</div>
 		</header>
 
@@ -41,7 +41,7 @@
 
 		<div id="reviews">
 			<div class="container">
-				<ul id="list"></ul>
+				<ul class="list-group" id="list-block"></ul>
 			</div>
 		</div>
 
@@ -53,14 +53,11 @@
 						<label>Review Title</label>
 						<input type="text" class="form-control" id="title" placeholder="Title for your review">
 						<br>
-						<label>Your Review</label>
-						<textarea rows="4" class="form-control" id="body" placeholder="What did you think of this spot?"></textarea>
-						<br>
 						<label>Rating</label>
 						<div id="star"></div>
-						<!--
-						<input type="text" id="body" placeholder="What did you think of this spot?">
-						-->
+						<br>
+						<label>Your Review</label>
+						<textarea rows="4" class="form-control" id="body" placeholder="What did you think of this spot?"></textarea>
 					</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
