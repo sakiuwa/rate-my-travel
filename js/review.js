@@ -88,6 +88,8 @@ var addItem = function(item) {
     var bad = item.get('bad');
     totalScore += starScore;
 
+    var reviewRating = $("<p>" + good + " out of " + (good + bad) + " people found this review helpful.</p>")
+
     var button = $("<button class='btn-danger btn-xs'><span class='glyphicon'>Delete</span></button>'");
     button.click(function() {
         item.destroy({
@@ -121,6 +123,7 @@ var addItem = function(item) {
     li2.append(reviewTitle);
     li2.append(reviewStar);
     li2.append(reviewBody);
+    li2.append(reviewRating);
     li2.append(button);
     li2.append(up);
     li2.append(down);
