@@ -1,12 +1,17 @@
 // Initialize Parse app
 Parse.initialize("w2ZOdACKB8ovedsTQne2DonK4rFHmZDZjb2O4EIG", "vpFVJ3Zt9TMKRiPFyn1n9tcDh7WWq43QuHAceYjy");
 var rating;
-var averageRating;
+var totalScore;
+var count;
 
+
+$('#ave-star').raty({
+	readOnly: true,
+	noRatedMsg: "Not yet rated!"
+});
 $('#star').raty({
 	click: function(score) {
 		rating = parseInt(score, 10);
-		// alert(rating);
 	}
 });
 
@@ -17,22 +22,22 @@ var review = new Reviews();
 
 $('form').submit(function() {
 	var review = new Reviews();
-	var text = $('#body').val();
 
 	review.set('title', $('#title').val());
 	review.set('rating', rating);
-	review.set('body', text);
+	review.set('body', $('#body').val());
+	review.set('good', 0);
+	review.set('bad', 0);
+
+	$('#title').val('');
+	$('#body').val('');
+	$('#star').raty('score', 0);
 
 	review.save(null, {
         success: getData
     });
-
-    review.set('title', '');
-	review.set('body', '');
-	$('#title').val('');
-	$('#body').val('');
 	
-	return false
+	return false;
 })
 
 
@@ -45,6 +50,8 @@ var getData = function() {
 
 	// Set a parameter for your query -- where the website property isn't missing
     // query.notEqualTo('title', '');
+    query.notEqualTo('rating', null);
+    query.descending("good");
 
     query.find({
         success: function(results) {
@@ -53,34 +60,21 @@ var getData = function() {
     })
 }
 
-var getRatings = function() {
-	var query = new Parse.Query(Reviews);
-	query.equalTo('rating');
-	query.find({
-		success: function(results) {
-			getAverage(results);
-		}
-	});
-}
-
-var getAverage = function(data) {
-	var sum = 0;
-	var count = 0;
-	for (i in data) {
-	}
-	averageRating = sum / count;
-}
-
-
 // A function to build your list
 var buildList = function(data) {
 	// Empty out your unordered list
-	$('#list-body').empty;
+	$('.list-group').empty();
 		// Loop through your data, and pass each element to the addItem function
+	totalScore = 0;
+	count = data.length;
+
     for (i in data) {
         addItem(data[i]);
-        console.log(data[i]);
     }
+    aveScore = totalScore / count;
+    $('#ave-star').raty({
+    	score: aveScore
+    });
 }
 
 
@@ -90,13 +84,10 @@ var addItem = function(item) {
     var title = item.get('title');
     var body = item.get('body');
     var starScore = item.get('rating');
-    //var song = item.get('song');
+    var good = item.get('good');
+    var bad = item.get('bad');
+    totalScore += starScore;
 
-	// Append li that includes text from the data item
-    var starRating = $('.starDisp').raty({
-		readOnly: true,
-		score : item.get('rating')
-	});
     var button = $("<button class='btn-danger btn-xs'><span class='glyphicon'>Delete</span></button>'");
     button.click(function() {
         item.destroy({
@@ -104,32 +95,52 @@ var addItem = function(item) {
         });
     });
 
+    var up = $("<button class='btn-default btn-xs'><i class='fa fa-thumbs-o-up'></i></button>");
+    up.click(function() {
+    	item.increment('good');
+    	item.save(null, {
+    		success: getData()
+    	});
+    })
+    var down = $("<button class='btn-default btn-xs'><i class='fa fa-thumbs-o-down'></i></button>");
+    down.click(function() {
+    	item.increment('bad');
+    	item.save(null, {
+    		success: getData()
+    	});
+    })
+
     var li2 = $("<li class='list-group-item'>");
     var reviewTitle = $("<h4 class='list-title'>" + title + "</h4>");
-    var reviewStar = $("<div class='starDisp'></div>");
+    var reviewStar = $(document.createElement('div')).raty({
+    	readOnly: true,
+    	score : starScore
+    });
     var reviewBody = $("<p class='list-body'>" + body + "</p></li>");
 
     li2.append(reviewTitle);
     li2.append(reviewStar);
     li2.append(reviewBody);
     li2.append(button);
+    li2.append(up);
+    li2.append(down);
 
     $('.list-group').append(li2);
-
-
 	// Time pending, create a button that removes the data item on click
 }
 
+var updateUp = function(itemID, good) {
+	var query = new Parse.Query(Reviews);
+	query.equalTo('objectID', itemID);
+	query.each(function(item) {
+		console.log(item.get('good'));
+		item.set('good', good + 1);
+	})
+};
+
+
 // Call your getData function when the page loads
 getData();
-getRatings();
-
-$('.ave-star').raty({
-	readOnly: true,
-	score : 3
-});
-
-
 
 
 

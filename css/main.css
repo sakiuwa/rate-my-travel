@@ -9,7 +9,7 @@ header {
 	background-position: center;
 	background-repeat: no-repeat;
 	height: 250px;
-	color: black;
+	color: white;
 }
 body {
 	background-color: rgba(233, 226, 206, 1);
@@ -17,8 +17,11 @@ body {
 #description {
 	margin: 2em;
 }
-li {
-
+i {
+	display: block;
+}
+clickableAwesomeFont {
+	cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
